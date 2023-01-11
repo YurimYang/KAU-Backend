@@ -1,15 +1,23 @@
 package com.example.kau.service;
 
 import com.example.kau.entity.Product;
+import com.example.kau.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ProductService {
-    public Product getProduct(Long id){
-        Product product = new Product();
-        product.setId(id);
-        product.setName("상품" + id);
+import java.util.Optional;
 
-        return product;
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    public Optional<Product> getProduct(Long id){
+        return productRepository.findById(id);
+    }
+
+    public Product createProduct (Product product) {
+        return productRepository.save(product);
     }
 }
