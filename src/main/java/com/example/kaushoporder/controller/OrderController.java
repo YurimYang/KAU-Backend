@@ -1,6 +1,8 @@
 package com.example.kaushoporder.controller;
 
 import com.example.kaushoporder.entity.Order;
+import com.example.kaushoporder.model.OrderDto;
+import com.example.kaushoporder.model.OrderDto;
 import com.example.kaushoporder.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +25,13 @@ public class OrderController {
     }
 
     @GetMapping("/v1/order/{orderId}")
-    public ResponseEntity<Order> getOrder(
+    public ResponseEntity<OrderDto> getOrder(
             @PathVariable("orderId") long orderId
     ) {
-        Optional<Order> optOrder = orderService.getOrder(orderId);
+        Optional<OrderDto> optOrderDto = orderService.getOrder(orderId);
 
-        if(optOrder.isPresent()) {
-            return ResponseEntity.ok(optOrder.get());
+        if(optOrderDto.isPresent()) {
+            return ResponseEntity.ok(optOrderDto.get());
         } else {
             return ResponseEntity.notFound().build();
         }
