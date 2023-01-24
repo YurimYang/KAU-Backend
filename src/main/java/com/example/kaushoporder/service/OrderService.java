@@ -16,6 +16,10 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
+    public Iterable<Order> getOrders() {
+        return orderRepository.findAll();
+    }
+
     public Order createOrder(Order product) {
         return orderRepository.save(product);
     }

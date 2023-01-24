@@ -23,7 +23,7 @@ public class OrderController {
     }
 
     @GetMapping("/v1/order/{orderId}")
-    public ResponseEntity<Order> getProduct(
+    public ResponseEntity<Order> getOrder(
             @PathVariable("orderId") long orderId
     ) {
         Optional<Order> optOrder = orderService.getOrder(orderId);
@@ -35,8 +35,15 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/v1/orders")
+    public ResponseEntity<Iterable<Order>> getOrders() {
+        Iterable<Order> orders = orderService.getOrders();
+
+        return ResponseEntity.ok(orders);
+    }
+
     @PostMapping("/v1/order")
-    public ResponseEntity createProduct(
+    public ResponseEntity createOrder(
             @RequestBody Order order
     ) {
         order.setId(null);
